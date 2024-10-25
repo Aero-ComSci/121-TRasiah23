@@ -17,6 +17,11 @@ score_display.hideturtle()
 score_display.penup()
 score_display.goto(200, 100)
 
+counter = trtl.Turtle()  # Initialize the counter turtle
+counter.hideturtle()
+counter.penup()
+counter.goto(-200, 100)
+
 turtle = trtl.Turtle()
 original_color = "pink"
 turtle.shape("circle")
@@ -45,7 +50,7 @@ def countdown():
     else:
         counter.write("Timer: " + str(timer), font=font_setup)
         score_display.write("Score: " + str(score), font=font_setup)
-        change_color()
+        color()
         timer -= 1
         counter.getscreen().ontimer(countdown, counter_interval)
 
