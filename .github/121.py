@@ -17,7 +17,7 @@ score_display.hideturtle()
 score_display.penup()
 score_display.goto(200, 100)
 
-counter = trtl.Turtle()  # Initialize the counter turtle
+counter = trtl.Turtle()
 counter.hideturtle()
 counter.penup()
 counter.goto(-200, 100)
@@ -28,16 +28,21 @@ turtle.shape("circle")
 turtle.color(original_color)
 turtle.shapesize(2)
 turtle.penup()
-turtle.goto(0, 0)
 
-colors = ["red", "blue", "green", "yellow", "purple", "orange", "cyan"]
+colors = ["red", "blue", "green", "yellow", "purple", "orange"]
+move_distance = 100
 
-def color():
+def change_color():
     global original_color
-    new_color = rd.choice(colors)
-    turtle.color(new_color)
-    turtle.stamp()
+    original_color = rd.choice(colors)
     turtle.color(original_color)
+
+def move_turtle():
+    x = rd.randint(-200, 200)
+    y = rd.randint(-200, 200)
+    turtle.goto(x, y)
+    change_color()
+    turtle.stamp() 
 
 def countdown():
     global timer, timer_up
@@ -50,13 +55,13 @@ def countdown():
     else:
         counter.write("Timer: " + str(timer), font=font_setup)
         score_display.write("Score: " + str(score), font=font_setup)
-        color()
         timer -= 1
+        move_turtle()
         counter.getscreen().ontimer(countdown, counter_interval)
 
 def spot(x, y):
     global score
-    if not timer_up and turtle.distance(x, y) < 20:  
+    if not timer_up and turtle.distance(x, y) < 20:
         score += 1
         print("Score:", score)
 
